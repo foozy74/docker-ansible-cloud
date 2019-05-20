@@ -22,12 +22,15 @@ RUN echo "===> Adding Ansible's prerequisites..."   && \
     pip3 install --upgrade openstacksdk              && \
     pip3 install --upgrade netapp-lib                && \
     pip3 install --upgrade lxml                      && \
+    pip3 install --upgrade boto                      && \
     \
     echo "===> Installing handy tools (not absolutely required)..."  && \
     apt-get install -y sshpass openssh-client  && \
     \
     echo "===> Installing handy tools (not absolutely required)..."  && \
-    pip3 install --upgrade --force-reinstall -r https://raw.githubusercontent.com/vmware/vsphere-automation-sdk-python/master/requirements.txt --extra-index-url https://github.com/vmware/vsphere-automation-sdk-python/tree/master/lib && \
+    git clone --depth 1 https://github.com/vmware/vsphere-automation-sdk-python && \
+    cd vsphere-automation-sdk-python && \
+    pip3 install --upgrade --force-reinstall -r requirements.txt --extra-index-url file:///vsphere-automation-sdk-python/lib && \
      \
     echo "===> Clean up..."                                         && \
     apt-get remove -y --auto-remove \
