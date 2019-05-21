@@ -23,6 +23,7 @@ RUN echo "===> Adding Ansible's prerequisites..."   && \
     pip3 install --upgrade netapp-lib                && \
     pip3 install --upgrade lxml                      && \
     pip3 install --upgrade boto                      && \
+    pip3 install --upgrade boto3                     && \
     \
     echo "===> Installing handy tools (not absolutely required)..."  && \
     apt-get install -y sshpass openssh-client  && \
