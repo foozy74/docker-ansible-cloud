@@ -44,9 +44,9 @@ RUN echo "===> Adding Ansible's prerequisites..."   && \
     echo 'localhost' > /etc/ansible/hosts
 
 
-# ENV PATH        /opt/ansible/bin:$PATH
-# ENV PYTHONPATH  /opt/ansible/lib:$PYTHONPATH
-# ENV MANPATH     /opt/ansible/docs/man:$MANPATH
+ENV PATH        /opt/ansible/bin:$PATH
+ENV PYTHONPATH  /opt/ansible/lib:$PYTHONPATH
+ENV MANPATH     /opt/ansible/docs/man:$MANPATH
 
 WORKDIR /work
 
