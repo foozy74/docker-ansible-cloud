@@ -3,7 +3,7 @@ Docker Image with Python lib for VMware and netapp
 
 
 
-you can test the basic function from ansible for Vmware / netapp
+you can test the basic function from ansible for Vmware / Netapp / DELL-openmanger tools
 
 ### Prerequisites
 you need a ansible config file white the minimum parameter
