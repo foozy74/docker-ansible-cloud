@@ -27,8 +27,12 @@ RUN echo "===> Adding Ansible's prerequisites..."   && \
     \
     echo "===> Installing handy tools (not absolutely required)..."  && \
     apt-get install -y sshpass openssh-client  && \
+    echo "===> Installing DELL-openmanger tools (not absolutely required)..."  && \
+    git clone -b devel --single-branch https://github.com/dell/dellemc-openmanage-ansible-modules.git && \
+    cd dellemc-openmanage-ansible-modules && \
+    python install.py && \
     \
-    echo "===> Installing handy tools (not absolutely required)..."  && \
+    echo "===> Installing vmware automation tools (not absolutely required)..."  && \
     git clone --depth 1 https://github.com/vmware/vsphere-automation-sdk-python && \
     cd vsphere-automation-sdk-python && \
     pip3 install --upgrade --force-reinstall -r requirements.txt --extra-index-url file:///vsphere-automation-sdk-python/lib && \
