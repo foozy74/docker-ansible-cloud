@@ -30,7 +30,7 @@ RUN echo "===> Adding Ansible's prerequisites..."   && \
     echo "===> Installing DELL-openmanger tools (not absolutely required)..."  && \
     git clone -b devel --single-branch https://github.com/dell/dellemc-openmanage-ansible-modules.git && \
     cd dellemc-openmanage-ansible-modules && \
-    python install.py && \
+    python3 install.py && \
     \
     echo "===> Installing vmware automation tools (not absolutely required)..."  && \
     git clone --depth 1 https://github.com/vmware/vsphere-automation-sdk-python && \
