@@ -24,7 +24,8 @@ RUN echo "===> Adding Ansible's prerequisites..."   && \
     pip3 install --upgrade lxml                      && \
     pip3 install --upgrade boto                      && \
     pip3 install --upgrade boto3                     && \
-    pip3 install --ansible-cmdb                      && \
+    pip3 install --upgrade ansible-cmdb              && \
+
     \
     echo "===> Installing handy tools (not absolutely required)..."  && \
     apt-get install -y sshpass openssh-client  && \
