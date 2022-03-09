@@ -1,19 +1,35 @@
 # pull base image
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
-ENV DEBIAN_FRONTEND=noninteractive
+ARG BUILD_DATE
+ARG NAME
+ARG VERSION
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VCS_URL
+
+LABEL summary="Ansible deployment tools" \
+  name="thesolution/docker-ansible-cloud" \
+  version="1.1.0" \
+  maintainer="juergen Mueller"
 
 RUN echo "===> Adding Ansible's prerequisites..."   && \
     apt-get update -y            && \
-    apt-get upgrade -y            && \
-        apt-get install --no-install-recommends -y -q  \
+    apt-get upgrade -y           && \
+    apt-get install --no-install-recommends -y software-properties-common && \
+    apt-get install --no-install-recommends -y \
                 build-essential                        \
-                python3.7 python3-pip python3-dev           \
+                python3.7 python3-pip python3-dev      \
                 libffi-dev libssl-dev                  \
                 libxml2-dev libxslt1-dev zlib1g-dev    \
-                git && \
-    python3 -m pip install --upgrade pip && \
+                git \
+                openssh-client sshpass rsync gpg gpg-agent\
+                bash bash-completion sudo \
+                vim less dos2unix unzip locate tree \
+                inetutils-ping  curl  wget  git  dialog && \
+    python3 -m pip install --upgrade pip             && \
     pip3 install --upgrade setuptools pip wheel      && \
+    pip3 install --upgrade molecule ansible-core     && \
     pip3 install --upgrade pyyaml jinja2 pycrypto    && \
     pip3 install --upgrade pywinrm                   && \
     pip3 install --upgrade pyvmomi                   && \
@@ -40,6 +56,9 @@ RUN echo "===> Adding Ansible's prerequisites..."   && \
     cd vsphere-automation-sdk-python && \
     pip3 install --upgrade --force-reinstall -r requirements.txt --extra-index-url file:///vsphere-automation-sdk-python/lib && \
      \
+    echo "===> Installing ansible-galaxy collection vmware "  && \
+    ansible-galaxy collection install community.vmware && \
+    \
     echo "===> Clean up..."                                         && \
     apt-get remove -y --auto-remove \
             build-essential python-pip python-dev git libffi-dev libssl-dev  && \
@@ -59,3 +78,4 @@ WORKDIR /work
 
 # default command: display Ansible version
 CMD [ "ansible-playbook", "--version" ]
+
